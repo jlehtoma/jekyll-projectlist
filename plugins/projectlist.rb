@@ -21,6 +21,10 @@ module Jekyll
       @projectdata['content'] = markdownify(self.content)
     end
 
+    def publish?
+      @projectdata['published'].nil? or @projectdata['published'] != false
+    end
+
     # Convert a Markdown string into HTML output.
     #
     # input - The Markdown String to convert.
@@ -43,9 +47,12 @@ module Jekyll
       return unless File.exists?(base)
 
       entries  = Dir.chdir(base) { site.filter_entries(Dir['**/*']) }
+
+      # Reverse chronological order
+      entries = entries.reverse
       entries.each do |f|
           project = Project.new(site, site.source, dir, f)
-          @@projects << project.projectdata
+          @@projects << project.projectdata if project.publish?
       end
     end
 
