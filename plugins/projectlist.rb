@@ -31,7 +31,7 @@ module Jekyll
     #
     # Returns the HTML formatted String.
     def markdownify(input)
-      converter = @site.getConverterImpl(Jekyll::MarkdownConverter)
+      converter = @site.getConverterImpl(Jekyll::Converters::Markdown)
       converter.convert(input)
     end
   end
