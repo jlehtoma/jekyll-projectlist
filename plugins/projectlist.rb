@@ -13,6 +13,7 @@ module Jekyll
 
     attr_accessor :data, :content
     attr_accessor :projectdata
+    attr_accessor :site
 
     def initialize(site, base, dir, name)
       @site = site
